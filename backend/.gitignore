@@ -31,3 +31,19 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Logs ###
+*.log
+logs/
+
+### Spring Boot ###
+*.pid
+application-local.properties
+application-local.yml
+application-dev.properties
+application-dev.yml
+
+### Environment ###
+.env
+.env.*
+!.env.example
