@@ -1,5 +1,6 @@
 package com.pitercoding.backend.entity;
 
+import com.pitercoding.backend.dto.UserDTO;
 import com.pitercoding.backend.enums.UserRole;
 
 import jakarta.persistence.Entity;
@@ -58,5 +59,15 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+
+    public UserDTO getUserDto() {
+        UserDTO dto = new UserDTO();
+        dto.setId(id);
+        dto.setName(name);
+        dto.setEmail(email);
+        dto.setUserRole(userRole);
+
+        return dto;
     }
 }
