@@ -1,12 +1,21 @@
-<!-- NG-ZORRO -->
-<a
-  href="https://github.com/NG-ZORRO/ng-zorro-antd"
-  target="_blank"
-  style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%"
->
-  <img
-    height="300"
-    alt="logo"
-    src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg"
-  />
-</a>
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/register">
+        <span nz-icon nzType="user"></span>
+        <span><strong>Register</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/">
+        <span nz-icon nzType="login"></span>
+        <span><strong>Login</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer></nz-footer>
+  </nz-layout>
+</nz-layout>
