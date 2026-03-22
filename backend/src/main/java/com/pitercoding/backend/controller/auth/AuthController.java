@@ -7,6 +7,7 @@ import com.pitercoding.backend.dto.UserDTO;
 import com.pitercoding.backend.entity.User;
 import com.pitercoding.backend.repository.UserRepository;
 import com.pitercoding.backend.services.auth.AuthService;
+import com.pitercoding.backend.services.jwt.UserService;
 import com.pitercoding.backend.util.JwtUtil;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signupUser(@RequestBody SignupRequest signupRequest){
@@ -45,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticationResponse(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<AuthenticationResponse> createAuthenticationResponse(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
@@ -53,18 +56,21 @@ public class AuthController {
             throw new BadCredentialsException("Incorrect username or password.");
         }
 
-        Optional<User> optionalUser = userRepository.findFirstByEmail(authenticationRequest.getEmail());
-        if (optionalUser.isEmpty()) {
+        final UserDetails userDetails = userService.userDetailsService()
+                .loadUserByUsername(authenticationRequest.getEmail());
+
+        if (!(userDetails instanceof User)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-        User user = optionalUser.get();
+        User user = (User) userDetails;
         final String jwt = jwtUtil.generateToken(user);
 
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         authenticationResponse.setJwt(jwt);
         authenticationResponse.setUserRole(user.getUserRole());
         authenticationResponse.setUserId(user.getId());
+
         return ResponseEntity.ok(authenticationResponse);
     }
 }
