@@ -4,6 +4,7 @@ import { DemoNgZorroAntdModule } from '../../../DemoNgZorroAntdModule';
 import { AuthService, LoginRequest, LoginResponse } from '../../services/auth/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
+import { UserStorageService } from '../../services/storage/user-storage.service';
 
 @Component({
   selector: 'app-login.component',
@@ -38,9 +39,9 @@ export class LoginComponent {
     const payload = this.loginForm.getRawValue() as LoginRequest;
     this.authService.login(payload).subscribe({
       next: (res: LoginResponse) => {
-        localStorage.setItem('token', res.jwt);
-        localStorage.setItem('userId', String(res.userId));
-        localStorage.setItem('userRole', res.userRole);
+        UserStorageService.signOut();
+        UserStorageService.saveToken(res.jwt);
+        UserStorageService.saveUser({ id: res.userId, role: res.userRole });
         this.message.success('Login successful', { nzDuration: 3000 });
         this.router.navigateByUrl('/');
       },
