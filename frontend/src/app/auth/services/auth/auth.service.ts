@@ -16,13 +16,29 @@ export interface SignupResponse {
   [key: string]: unknown;
 }
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  jwt: string;
+  userId: number | string;
+  userRole: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
   constructor(private http: HttpClient) {}
 
   register(signupRequest: SignupRequest): Observable<SignupResponse> {
     return this.http.post<SignupResponse>(BASIC_URL + 'api/auth/signup', signupRequest);
+  }
+
+  login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(BASIC_URL + 'api/auth/login', loginRequest);
   }
 }

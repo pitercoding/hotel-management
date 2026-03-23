@@ -1,16 +1,28 @@
 package com.pitercoding.backend.controller.auth;
 
+import com.pitercoding.backend.dto.AuthenticationRequest;
+import com.pitercoding.backend.dto.AuthenticationResponse;
 import com.pitercoding.backend.dto.SignupRequest;
 import com.pitercoding.backend.dto.UserDTO;
+import com.pitercoding.backend.entity.User;
+import com.pitercoding.backend.repository.UserRepository;
 import com.pitercoding.backend.services.auth.AuthService;
+import com.pitercoding.backend.services.jwt.UserService;
+import com.pitercoding.backend.util.JwtUtil;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,6 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signupUser(@RequestBody SignupRequest signupRequest){
@@ -29,5 +45,32 @@ public class AuthController {
         } catch (Exception e) {
             return new ResponseEntity<>("User not created, come again later", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> createAuthenticationResponse(@RequestBody AuthenticationRequest authenticationRequest) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException("Incorrect username or password.");
+        }
+
+        final UserDetails userDetails = userService.userDetailsService()
+                .loadUserByUsername(authenticationRequest.getEmail());
+
+        if (!(userDetails instanceof User)) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        User user = (User) userDetails;
+        final String jwt = jwtUtil.generateToken(user);
+
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        authenticationResponse.setJwt(jwt);
+        authenticationResponse.setUserRole(user.getUserRole());
+        authenticationResponse.setUserId(user.getId());
+
+        return ResponseEntity.ok(authenticationResponse);
     }
 }
