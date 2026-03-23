@@ -43,7 +43,12 @@ export class LoginComponent {
         UserStorageService.saveToken(res.jwt);
         UserStorageService.saveUser({ id: res.userId, role: res.userRole });
         this.message.success('Login successful', { nzDuration: 3000 });
-        this.router.navigateByUrl('/');
+
+        if(UserStorageService.isAdminLoggedIn()) {
+          this.router.navigateByUrl('/admin/dashboard');
+        } else if(UserStorageService.isCustomerLoggedIn()) {
+          this.router.navigateByUrl('/customer/rooms');
+        }
       },
       error: () => {
         this.message.error('Bad credentials', { nzDuration: 5000 });
