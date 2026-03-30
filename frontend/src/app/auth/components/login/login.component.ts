@@ -45,7 +45,7 @@ export class LoginComponent {
         this.message.success('Login successful', { nzDuration: 3000 });
 
         if(UserStorageService.isAdminLoggedIn()) {
-          this.router.navigateByUrl('/admin/dashboard');
+          this.router.navigateByUrl('/admin/rooms');
         } else if(UserStorageService.isCustomerLoggedIn()) {
           this.router.navigateByUrl('/customer/rooms');
         }

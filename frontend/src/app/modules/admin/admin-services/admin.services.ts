@@ -11,6 +11,20 @@ export interface PostRoomRequest {
   price: number;
 }
 
+export interface RoomDto {
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  available: boolean;
+}
+
+export interface RoomsResponse {
+  roomDtoList: RoomDto[];
+  totalPages: number;
+  pageNumber: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,6 +37,12 @@ export class AdminServices {
     });
   }
 
+  getRooms(pageNumber: number): Observable<RoomsResponse> {
+    return this.http.get<RoomsResponse>(BASIC_URL + `api/admin/rooms/${pageNumber}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     const token = UserStorageService.getToken();
     let authHeaders = new HttpHeaders();
@@ -30,7 +50,6 @@ export class AdminServices {
     if (!token) {
       return authHeaders;
     }
-
     return authHeaders.set('Authorization', 'Bearer ' + token);
   }
 }
