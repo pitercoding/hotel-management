@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout class="app-layout">
   @if (!isCustomerLoggedIn && !isAdminLoggedIn) {
     <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
@@ -59,7 +59,7 @@
     </nz-sider>
   }
 
-  <nz-layout>
+  <nz-layout class="app-content-layout">
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>

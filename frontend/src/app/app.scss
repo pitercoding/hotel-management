@@ -5,6 +5,14 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-content-layout {
+  min-height: 100vh;
+}
+
 nz-header {
   background: #fff;
   padding: 0;
@@ -12,6 +20,8 @@ nz-header {
 
 nz-content {
   margin: 0 16px;
+  min-height: 100vh;
+  background: #f0f2f5;
 }
 
 nz-breadcrumb {
