@@ -4,12 +4,14 @@ import com.pitercoding.backend.dto.RoomDTO;
 import com.pitercoding.backend.dto.RoomsResponseDTO;
 import com.pitercoding.backend.entity.Room;
 import com.pitercoding.backend.repository.RoomRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +46,14 @@ public class RoomsServiceImpl implements RoomsService {
         roomsResponseDTO.setRoomDtoList(roomPage.stream().map(Room::getRoomDto).collect(Collectors.toList()));
 
         return roomsResponseDTO;
+    }
+
+    public RoomDTO getRoomById(Long id){
+        Optional<Room> optionalRoom = roomRepository.findById(id);
+        if(optionalRoom.isPresent()){
+            return optionalRoom.get().getRoomDto();
+        } else {
+            throw new EntityNotFoundException("Room with id " + id + " not found");
+        }
     }
 }
