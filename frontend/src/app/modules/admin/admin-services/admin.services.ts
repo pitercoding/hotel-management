@@ -11,6 +11,12 @@ export interface PostRoomRequest {
   price: number;
 }
 
+export interface UpdateRoomRequest {
+  name: string;
+  type: string;
+  price: number;
+}
+
 export interface RoomDto {
   id: number;
   name: string;
@@ -39,6 +45,18 @@ export class AdminServices {
 
   getRooms(pageNumber: number): Observable<RoomsResponse> {
     return this.http.get<RoomsResponse>(BASIC_URL + `api/admin/rooms/${pageNumber}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getRoomById(id: number): Observable<RoomDto> {
+    return this.http.get<RoomDto>(BASIC_URL + `api/admin/room/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  updateRoom(id: number, roomDto: UpdateRoomRequest): Observable<void> {
+    return this.http.put<void>(BASIC_URL + `api/admin/room/${id}`, roomDto, {
       headers: this.createAuthorizationHeader(),
     });
   }

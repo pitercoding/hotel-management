@@ -49,7 +49,7 @@ export class PostRoomComponent {
         this.message.success('Room posted successfully.', {
           nzDuration: 5000,
         });
-        this.router.navigateByUrl('/admin/rooms');
+        this.router.navigateByUrl('/admin/dashboard');
       },
       error: (error) => {
         const errorMessage =

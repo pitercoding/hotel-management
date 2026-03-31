@@ -2,13 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostRoomComponent } from './components/post-room/post-room.component';
+import { AdminComponent } from './admin.component';
+import { UpdateRoomComponent } from './components/updateroom/updateroom.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'rooms' },
-  { path: 'dashboard', redirectTo: 'rooms', pathMatch: 'full' },
-  { path: 'rooms', component: DashboardComponent },
-  { path: 'room', component: PostRoomComponent },
-  { path: 'reservations', redirectTo: 'rooms', pathMatch: 'full' },
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'rooms', component: DashboardComponent },
+      { path: 'room', component: PostRoomComponent },
+      { path: 'room/:id/edit', component: UpdateRoomComponent },
+    ],
+  },
 ];
 
 @NgModule({
