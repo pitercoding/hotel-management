@@ -15,10 +15,10 @@
         </div>
       </nz-card>
       <ng-template #actionEdit>
-        <span nz-icon nzType="edit" nzTheme="twotone" class="icon" routerLink="/admin/room/{{room.id}}/edit"></span>
+        <span nz-icon nzType="edit" nzTheme="twotone" class="icon" [routerLink]="['/admin/room', room.id, 'edit']"></span>
       </ng-template>
       <ng-template #actionDelete>
-        <span nz-icon nzType="delete" nzTheme="twotone" class="icon" [nzTwotoneColor]="'#FF0000'"></span>
+        <span nz-icon nzType="delete" nzTheme="twotone" class="icon" [nzTwotoneColor]="'#FF0000'" (click)="showConfirm(room.id)"></span>
       </ng-template>
     </div>
   </div>
