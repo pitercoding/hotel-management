@@ -3,11 +3,11 @@
     <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="/register">
+      <li nz-menu-item routerLink="/register" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="user"></span>
         <span><strong>Register</strong></span>
       </li>
-      <li nz-menu-item routerLink="/login">
+      <li nz-menu-item routerLink="/login" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="login"></span>
         <span><strong>Login</strong></span>
       </li>
@@ -19,15 +19,15 @@
     <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="/admin/room">
+      <li nz-menu-item routerLink="/admin/room" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="apartment"></span>
         <span><strong>Post Room</strong></span>
       </li>
-      <li nz-menu-item routerLink="/admin/dashboard">
+      <li nz-menu-item routerLink="/admin/dashboard" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="apartment"></span>
         <span><strong>Rooms</strong></span>
       </li>
-      <li nz-menu-item routerLink="/admin/reservations">
+      <li nz-menu-item routerLink="/admin/reservations" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="pull-request"></span>
         <span><strong>Reservations</strong></span>
       </li>
@@ -43,11 +43,11 @@
     <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="/customer/rooms">
+      <li nz-menu-item routerLink="/customer/rooms" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="apartment"></span>
         <span><strong>Rooms</strong></span>
       </li>
-      <li nz-menu-item routerLink="/customer/bookings">
+      <li nz-menu-item routerLink="/customer/bookings" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="pull-request"></span>
         <span><strong>Bookings</strong></span>
       </li>

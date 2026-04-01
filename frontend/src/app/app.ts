@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, Router, RouterLinkActive } from '@angular/router';
 import { DemoNgZorroAntdModule } from './DemoNgZorroAntdModule';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserStorageService } from './auth/services/storage/user-storage.service';
@@ -10,6 +10,7 @@ import { UserStorageService } from './auth/services/storage/user-storage.service
   imports: [
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     DemoNgZorroAntdModule,
     ReactiveFormsModule,
 ],
