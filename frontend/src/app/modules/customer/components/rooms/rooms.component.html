@@ -1,1 +1,31 @@
-<p>rooms.component works!</p>
+<div class="center-form">
+
+  <div class="room-container">
+    <div class="room-row" *ngFor="let room of rooms">
+      <nz-card class="room-card" [nzActions]="[actionEdit]">
+        <div class="room-card-content">
+          <nz-avatar class="room-avatar" [nzSrc]="hotelRoomImage"></nz-avatar>
+
+          <div class="room-details">
+            <div class="room-name">{{ room.name }}</div>
+            <div class="room-meta">Type: {{ room.type }}</div>
+            <div class="room-meta">Price: {{ room.price }}</div>
+          </div>
+        </div>
+      </nz-card>
+      <ng-template #actionEdit>
+        <span nz-icon nzType="check-square" nzTheme="twotone" class="icon"></span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="totalPages > 0">
+    <nz-pagination
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalPages"
+      [nzPageSize]="pageSize"
+      (nzPageIndexChange)="pageIndexChange($event)"
+    ></nz-pagination>
+  </div>
+</div>
+
