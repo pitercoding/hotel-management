@@ -14,7 +14,7 @@
         </div>
       </nz-card>
       <ng-template #actionEdit>
-        <span nz-icon nzType="check-square" nzTheme="twotone" class="icon"></span>
+        <span nz-icon nzType="check-square" nzTheme="twotone" class="icon" (click)="showModalMiddle(room.id)"></span>
       </ng-template>
     </div>
   </div>
@@ -28,4 +28,14 @@
     ></nz-pagination>
   </div>
 </div>
+
+<nz-modal nzTitle="Book Room" nzCentered [(nzVisible)]="isVisibleMiddle" (nzOnCancel)="handleCancelMiddle()" (nzOnOk)="handleOkMiddle()">
+
+  <ng-container *nzModalContent>
+    <div class="modal-content">
+      <nz-range-picker style="width: 100%" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+    </div>
+  </ng-container>
+
+</nz-modal>
 
