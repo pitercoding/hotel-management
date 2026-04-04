@@ -6,17 +6,21 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DemoNgZorroAntdModule } from '../../DemoNgZorroAntdModule';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostRoomComponent } from './components/post-room/post-room.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
+import { UpdateRoomComponent } from './components/updateroom/updateroom.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     DashboardComponent,
-    PostRoomComponent],
+    PostRoomComponent,
+    ReservationsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     DemoNgZorroAntdModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    UpdateRoomComponent],
 })
 export class AdminModule {}
