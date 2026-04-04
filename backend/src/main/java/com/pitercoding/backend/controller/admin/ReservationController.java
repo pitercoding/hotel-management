@@ -24,4 +24,15 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong.");
         }
     }
+
+    @GetMapping("/reservation/{reservationId}/{reservationStatus}")
+    public ResponseEntity<?> changeReservationStatus(@PathVariable Long reservationId, @PathVariable String reservationStatus) {
+        boolean success = reservationService.changeReservationStatus(reservationId, reservationStatus);
+
+        if (success) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong.");
+        }
+    }
 }
