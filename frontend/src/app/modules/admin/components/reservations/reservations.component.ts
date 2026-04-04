@@ -75,4 +75,23 @@ export class ReservationsComponent implements OnInit {
     this.currentPage = value;
     this.getReservations();
   }
+
+  changeReservationStatus(bookingId: number, status: 'APPROVED' | 'REJECTED') {
+    this.adminService.changeReservationStatus(bookingId, status).subscribe({
+      next: () => {
+        this.message.success('Reservation status updated successfully', {
+          nzDuration: 5000,
+        });
+        this.getReservations();
+      },
+      error: (error) => {
+        const errorMessage =
+          typeof error?.error === 'string' && error.error.trim().length > 0
+            ? error.error
+            : 'Unable to update reservation status right now.';
+
+        this.message.error(errorMessage, { nzDuration: 5000 });
+      },
+    });
+  }
 }

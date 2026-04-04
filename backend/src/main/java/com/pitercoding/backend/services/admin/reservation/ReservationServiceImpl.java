@@ -47,10 +47,12 @@ public class ReservationServiceImpl implements ReservationService {
         if (optionalReservation.isPresent()) {
             Reservation existingReservation = optionalReservation.get();
 
-            if(Objects.equals(reservationStatus, "Approve")) {
+            if (Objects.equals(reservationStatus, ReservationStatus.APPROVED.name())) {
                 existingReservation.setReservationStatus(ReservationStatus.APPROVED);
-            } else {
+            } else if (Objects.equals(reservationStatus, ReservationStatus.REJECTED.name())) {
                 existingReservation.setReservationStatus(ReservationStatus.REJECTED);
+            } else {
+                return false;
             }
             reservationRepository.save(existingReservation);
 

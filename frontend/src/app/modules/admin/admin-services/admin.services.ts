@@ -73,6 +73,12 @@ export class AdminServices {
     });
   }
 
+  changeReservationStatus(reservationId: number, reservationStatus: string): Observable<void> {
+    return this.http.put<void>(BASIC_URL + `api/admin/reservation/${reservationId}/${reservationStatus}`, null, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     const token = UserStorageService.getToken();
     let authHeaders = new HttpHeaders();
