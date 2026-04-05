@@ -1,7 +1,6 @@
 <nz-layout class="app-layout">
   @if (!isCustomerLoggedIn && !isAdminLoggedIn) {
     <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/register" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="user"></span>
@@ -17,7 +16,9 @@
 
   @if (isAdminLoggedIn) {
     <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="images/hotel-logged.jpg" alt="Hotel photo" class="sider-logo" />
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/admin/room" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="apartment"></span>
@@ -41,7 +42,9 @@
 
   @if (isCustomerLoggedIn) {
     <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="images/hotel-logged.jpg" alt="Hotel photo" class="sider-logo" />
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/customer/rooms" routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{ exact: true }">
         <span nz-icon nzType="apartment"></span>

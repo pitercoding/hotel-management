@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --hotel-ink: #0f1c2e;
+  --hotel-navy: #12263a;
+  --hotel-sand: #f7f4ee;
+  --hotel-cream: #fffaf2;
+  --hotel-gold: #c8a864;
+  --hotel-border: rgba(18, 38, 58, 0.12);
+  --hotel-muted: rgba(18, 38, 58, 0.6);
+  --hotel-shadow: 0 12px 30px rgba(15, 28, 46, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--hotel-ink);
+  background: radial-gradient(1200px 600px at 20% 0%, #ffffff 0%, var(--hotel-sand) 60%, #efe9de 100%);
+  font-family: "Trebuchet MS", "Segoe UI", "Tahoma", sans-serif;
+}
