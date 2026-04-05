@@ -1,59 +1,61 @@
 <div class="center-form">
   <h1 class="page-title">My Bookings</h1>
 
-  <nz-table #basicTable [nzShowPagination]="false" [nzData]="bookings">
-    <thead>
-      <tr>
-        <th>Room Name</th>
-        <th>Room Type</th>
+  <div class="table-card">
+    <nz-table #basicTable [nzShowPagination]="false" [nzData]="bookings">
+      <thead>
+        <tr>
+          <th>Room Name</th>
+          <th>Room Type</th>
           <th>Check In Date</th>
           <th>Check Out Date</th>
           <th>Price</th>
           <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (booking of basicTable.data; track booking.id) {
-        <tr>
-          <td>{{ booking.roomName }}</td>
-          <td>{{ booking.roomType }}</td>
-          <td>{{ booking.checkInDate }}</td>
-          <td>{{ booking.checkOutDate }}</td>
-          <td>{{ booking.price }}</td>
-          <td>
-            @if (booking.reservationStatus === 'PENDING') {
-              <ng-container >
-                <nz-tag nzColor="processing">
-                  <span nz-icon nzType="sync" nzSpin></span>
-                  <span>Pending</span>
-                </nz-tag>
-              </ng-container>
-            }
-
-            @if (booking.reservationStatus === 'APPROVED') {
-              <ng-container >
-                <nz-tag nzColor="success">
-                  <span nz-icon nzType="check-circle"></span>
-                  <span>Approved</span>
-                </nz-tag>
-              </ng-container>
-            }
-
-            @if (booking.reservationStatus === 'REJECTED') {
-              <ng-container >
-                <nz-tag nzColor="error">
-                  <span nz-icon nzType="close-circle"></span>
-                  <span>Rejected</span>
-                </nz-tag>
-              </ng-container>
-            }
-          </td>
         </tr>
-      }
-    </tbody>
+      </thead>
+      <tbody>
+        @for (booking of basicTable.data; track booking.id) {
+          <tr>
+            <td>{{ booking.roomName }}</td>
+            <td>{{ booking.roomType }}</td>
+            <td>{{ booking.checkInDate }}</td>
+            <td>{{ booking.checkOutDate }}</td>
+            <td>{{ booking.price }}</td>
+            <td>
+              @if (booking.reservationStatus === 'PENDING') {
+                <ng-container>
+                  <nz-tag nzColor="processing">
+                    <span nz-icon nzType="sync" nzSpin></span>
+                    <span>Pending</span>
+                  </nz-tag>
+                </ng-container>
+              }
 
-  </nz-table>
-  <div class="pagination">
-    <nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="currentPage" [nzTotal]="total" [nzPageSize]="pageSize"></nz-pagination>
+              @if (booking.reservationStatus === 'APPROVED') {
+                <ng-container>
+                  <nz-tag nzColor="success">
+                    <span nz-icon nzType="check-circle"></span>
+                    <span>Approved</span>
+                  </nz-tag>
+                </ng-container>
+              }
+
+              @if (booking.reservationStatus === 'REJECTED') {
+                <ng-container>
+                  <nz-tag nzColor="error">
+                    <span nz-icon nzType="close-circle"></span>
+                    <span>Rejected</span>
+                  </nz-tag>
+                </ng-container>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+
+    </nz-table>
+    <div class="pagination">
+      <nz-pagination (nzPageIndexChange)="pageIndexChange($event)" [nzPageIndex]="currentPage" [nzTotal]="total" [nzPageSize]="pageSize"></nz-pagination>
+    </div>
   </div>
 </div>
