@@ -31,8 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 
 @ExtendWith(MockitoExtension.class)
-class done
-{
+class BookingServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
