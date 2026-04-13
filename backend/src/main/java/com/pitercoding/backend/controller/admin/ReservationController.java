@@ -1,5 +1,6 @@
 package com.pitercoding.backend.controller.admin;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import com.pitercoding.backend.services.admin.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class ReservationController {
 
     private final ReservationService reservationService;
