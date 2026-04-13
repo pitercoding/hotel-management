@@ -2,6 +2,7 @@ package com.pitercoding.backend.controller.customer;
 
 import com.pitercoding.backend.dto.ReservationDTO;
 import com.pitercoding.backend.services.customer.booking.BookingService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/customer")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class BookingController {
 
     private final BookingService bookingService;

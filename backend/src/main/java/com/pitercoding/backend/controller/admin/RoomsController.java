@@ -2,6 +2,7 @@ package com.pitercoding.backend.controller.admin;
 
 import com.pitercoding.backend.dto.RoomDTO;
 import com.pitercoding.backend.services.admin.rooms.RoomsService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class RoomsController {
 
     private final RoomsService roomsService;
